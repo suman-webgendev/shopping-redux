@@ -1,0 +1,81 @@
+ul {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    list-style: none;
+}
+
+ul li {
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-gap: 15px;
+    grid-template-rows: 190px 30px 30px 30px;
+    justify-items: center;
+    padding: 10px;
+}
+
+ul li span {
+    animation-name: animate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    background: linear-gradient(to right, #eee 8%, #ddd 18%, #eee 33%);
+    background-color: #ccc;
+    background-size: 800px 100px;
+    width: 100%;
+}
+
+ul li span.name {
+    max-width: 90%;
+}
+
+ul li span.price {
+    max-width: 100px;
+}
+
+ul li span.actions {
+    max-width: 80%;
+}
+
+
+@-moz-keyframes animate {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@-webkit-keyframes animate {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@-o-keyframes animate {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@keyframes animate {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}

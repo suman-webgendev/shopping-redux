@@ -7,11 +7,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { formatPrice } from "@/lib/utils";
 import { ShoppingCart } from "lucide-react";
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import CartItems from "./cart-items";
 import EmptyCart from "./empty-cart";
+import { ScrollArea } from "./ui/scroll-area";
 
 const Cart = () => {
   const totalQty = useSelector((state) => state.cart.totalQty);
@@ -29,26 +31,29 @@ const Cart = () => {
           )}
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[90dvw]">
+      <DialogContent className="w-[90%]">
         <DialogHeader>
           <DialogTitle>Cart</DialogTitle>
           <DialogDescription>
             All of your cart items will appear here
           </DialogDescription>
         </DialogHeader>
+
         <div className="grid gap-4 py-4">
-          {products.length === 0 && <EmptyCart />}
-          {products.length > 0 &&
-            products.map((product) => (
-              <Fragment key={product.id}>
-                <CartItems product={product} />
-              </Fragment>
-            ))}
+          <ScrollArea className="h-60">
+            {products.length === 0 && <EmptyCart />}
+            {products.length > 0 &&
+              products.map((product) => (
+                <Fragment key={product.id}>
+                  <CartItems product={product} />
+                </Fragment>
+              ))}
+          </ScrollArea>
         </div>
         {products.length > 0 && (
           <>
             <div className="text-right text-lg font-medium">
-              Total: {subTotal}
+              Total: {formatPrice(subTotal)}
             </div>
             <Button>Check out</Button>
           </>

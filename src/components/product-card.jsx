@@ -1,39 +1,67 @@
-import { IndianRupee } from "lucide-react";
+import { formatPrice } from "@/lib/utils";
+import { addToCart, removeFromCart } from "@/store/slices/cart-slice";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../store/slices/cart-slice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { Button } from "./ui/button";
-import { Card, CardContent, CardHeader } from "./ui/card";
+import { Card, CardContent, CardDescription, CardHeader } from "./ui/card";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
     dispatch(
       addToCart({
         id: product.id,
-        name: product.name,
+        name: product.title,
         price: product.price,
       }),
     );
+    toast("Item added to cart.", {
+      description: `${product.title} was added to cart`,
+      action: {
+        label: "Undo",
+        onClick: () => {
+          dispatch(removeFromCart(product.id));
+        },
+      },
+    });
   };
+
+  const handleCardClick = () => {
+    navigate("/product-details", {
+      state: {
+        id: product.id,
+      },
+    });
+  };
+
   return (
-    <Card className="flex h-96 w-72 flex-col overflow-hidden rounded p-2 shadow-lg">
-      <CardHeader className="h-64 p-0">
+    <Card
+      className="flex h-96 w-72 cursor-pointer flex-col overflow-hidden rounded p-2 shadow-lg"
+      onClick={handleCardClick}
+    >
+      <CardHeader className="h-52 p-0">
         <div className="flex h-full w-full items-center justify-center">
           <img
             className="size-full object-contain"
             loading="lazy"
-            src={product.imageUrl}
-            alt={product.itemName}
+            src={product.image}
+            alt={product.title}
           />
         </div>
       </CardHeader>
+
       <CardContent className="flex flex-grow flex-col justify-between p-4">
-        <p className="mb-2 truncate text-xl font-bold">{product.itemName}</p>
+        <p className="mb-2 truncate font-semibold">{product.title}</p>
+        <CardDescription className="line-clamp-2 h-[2.8rem] overflow-hidden pb-2">
+          {product.description}
+        </CardDescription>
         <div className="flex items-center justify-between rounded p-2">
-          <div className="flex items-center text-lg font-semibold">
-            <IndianRupee className="text-base" />
-            {product.price}
+          <div className="text-lg font-semibold">
+            {formatPrice(product.price)}
           </div>
           <Button onClick={handleAddToCart}>Add to cart</Button>
         </div>

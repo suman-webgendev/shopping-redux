@@ -1,9 +1,10 @@
+import { formatPrice } from "@/lib/utils";
 import {
   addToCart,
   clearItems,
   removeFromCart,
 } from "@/store/slices/cart-slice";
-import { IndianRupee, Minus, Plus, Trash } from "lucide-react";
+import { Minus, Plus, Trash } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
@@ -22,12 +23,9 @@ const CartItems = ({ product }) => {
   };
 
   return (
-    <Card className="flex items-center justify-between gap-2 px-2 py-4">
+    <Card className="mb-2 flex items-center justify-between gap-2 px-2 py-4">
       <CardHeader className="p-2 font-semibold">{product.name}</CardHeader>
-      <div className="flex">
-        <IndianRupee className="text-xs" />
-        {product.totalAmt}
-      </div>
+      <div className="flex">{formatPrice(product.totalAmt)}</div>
       <CardContent className="flex items-center p-2">
         <Button variant="icon" className="p-1" onClick={handleAddToCart}>
           <span className="sr-only">Add one more item to the cart.</span>
