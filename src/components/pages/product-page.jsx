@@ -1,14 +1,14 @@
+import Button from "@/components/ui/button";
 import { capitalize } from "@/lib/utils";
 import {
   useGetProductCategoryQuery,
   useGetProductsQuery,
 } from "@/store/slices/product-api-slice";
 import { motion } from "framer-motion";
-import { Suspense, useCallback, useState } from "react";
+import { memo, Suspense, useCallback, useState } from "react";
 import AddProduct from "../add-product";
 import ProductCard from "../product-card";
 import ProductLoading from "../products-loading";
-import { Button } from "../ui/button";
 import { Combobox } from "../ui/combobox";
 import { ScrollArea } from "../ui/scroll-area";
 
@@ -99,4 +99,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default memo(ProductPage);

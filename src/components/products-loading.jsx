@@ -1,4 +1,5 @@
 import "@/style/products-loading.css";
+import { memo } from "react";
 
 const ProductLoading = () => {
   return (
@@ -25,4 +26,4 @@ const ProductLoading = () => {
   );
 };
 
-export default ProductLoading;
+export default memo(ProductLoading);

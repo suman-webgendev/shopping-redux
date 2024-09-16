@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useNavigate } from "react-router-dom";
 import Cart from "./cart";
 
@@ -15,4 +16,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default memo(Nav);

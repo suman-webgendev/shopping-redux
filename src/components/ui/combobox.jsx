@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -14,9 +14,9 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 
-export const Combobox = ({ options, value, onChange }) => {
+export const Combobox = forwardRef(({ options, value, onChange }, ref) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,6 +27,7 @@ export const Combobox = ({ options, value, onChange }) => {
           role="combobox"
           aria-expanded={open}
           className="w-full justify-between"
+          ref={ref}
         >
           {value
             ? options.find((option) => option.value === value)?.label
@@ -64,4 +65,6 @@ export const Combobox = ({ options, value, onChange }) => {
       </PopoverContent>
     </Popover>
   );
-};
+});
+
+Combobox.displayName = "Combobox";

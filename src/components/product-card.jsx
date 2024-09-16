@@ -1,42 +1,46 @@
+import Button from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 import { addToCart, removeFromCart } from "@/store/slices/cart-slice";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { Button } from "./ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "./ui/card";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleAddToCart = (e) => {
-    e.stopPropagation();
-    dispatch(
-      addToCart({
-        id: product.id,
-        name: product.title,
-        price: product.price,
-      }),
-    );
-    toast("Item added to cart.", {
-      description: `${product.title} was added to cart`,
-      action: {
-        label: "Undo",
-        onClick: () => {
-          dispatch(removeFromCart(product.id));
+  const handleAddToCart = useCallback(
+    (e) => {
+      e.stopPropagation();
+      dispatch(
+        addToCart({
+          id: product.id,
+          name: product.title,
+          price: product.price,
+        }),
+      );
+      toast("Item added to cart.", {
+        description: `${product.title} was added to cart`,
+        action: {
+          label: "Undo",
+          onClick: () => {
+            dispatch(removeFromCart(product.id));
+          },
         },
-      },
-    });
-  };
+      });
+    },
+    [dispatch, product],
+  );
 
-  const handleCardClick = () => {
+  const handleCardClick = useCallback(() => {
     navigate("/product-details", {
       state: {
         id: product.id,
       },
     });
-  };
+  }, [navigate, product]);
 
   return (
     <Card

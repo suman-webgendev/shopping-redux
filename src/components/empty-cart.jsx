@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const EmptyCart = () => {
   return (
     <div className="flex size-full flex-col items-center justify-center">
@@ -13,4 +15,4 @@ const EmptyCart = () => {
   );
 };
 
-export default EmptyCart;
+export default memo(EmptyCart);

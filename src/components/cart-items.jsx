@@ -5,14 +5,16 @@ import {
   removeFromCart,
 } from "@/store/slices/cart-slice";
 import { Minus, Plus, Trash } from "lucide-react";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Button } from "./ui/button";
+
+import Button from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
 
 const CartItems = ({ product }) => {
   const dispatch = useDispatch();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     dispatch(
       addToCart({
         id: product.id,
@@ -20,7 +22,7 @@ const CartItems = ({ product }) => {
         price: product.price,
       }),
     );
-  };
+  }, [dispatch, product]);
 
   return (
     <Card className="mb-2 flex items-center justify-between gap-2 px-2 py-4">

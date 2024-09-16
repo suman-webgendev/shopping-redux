@@ -1,13 +1,13 @@
+import Button from "@/components/ui/button";
 import { formatPrice } from "@/lib/utils";
 import { addToCart, removeFromCart } from "@/store/slices/cart-slice";
 import { useGetProductByIdQuery } from "@/store/slices/product-api-slice";
 import { ShoppingCart } from "lucide-react";
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import ProductDetailsLoading from "../product-details-loading";
-import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 
 const ProductDetails = () => {
@@ -17,25 +17,28 @@ const ProductDetails = () => {
 
   const { data: product, error, isLoading } = useGetProductByIdQuery(id);
 
-  const handleAddToCart = (e) => {
-    e.stopPropagation();
-    dispatch(
-      addToCart({
-        id: product.id,
-        name: product.title,
-        price: product.price,
-      }),
-    );
-    toast("Item added to cart.", {
-      description: `${product.title} was added to cart`,
-      action: {
-        label: "Undo",
-        onClick: () => {
-          dispatch(removeFromCart(product.id));
+  const handleAddToCart = useCallback(
+    (e) => {
+      e.stopPropagation();
+      dispatch(
+        addToCart({
+          id: product.id,
+          name: product.title,
+          price: product.price,
+        }),
+      );
+      toast("Item added to cart.", {
+        description: `${product.title} was added to cart`,
+        action: {
+          label: "Undo",
+          onClick: () => {
+            dispatch(removeFromCart(product.id));
+          },
         },
-      },
-    });
-  };
+      });
+    },
+    [dispatch, product],
+  );
 
   return (
     <ScrollArea className="h-[90vh]">

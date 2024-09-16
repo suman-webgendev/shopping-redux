@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { memo } from "react";
 
 const ProductDetailsLoading = () => {
   return (
@@ -16,4 +17,4 @@ const ProductDetailsLoading = () => {
   );
 };
 
-export default ProductDetailsLoading;
+export default memo(ProductDetailsLoading);

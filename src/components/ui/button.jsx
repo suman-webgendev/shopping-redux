@@ -1,10 +1,10 @@
 import { Slot } from "@radix-ui/react-slot";
-import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { forwardRef, memo } from "react";
 import { buttonVariants } from "./button-variants";
 
-const Button = React.forwardRef(
+const Button = forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -18,4 +18,4 @@ const Button = React.forwardRef(
 );
 Button.displayName = "Button";
 
-export { Button };
+export default memo(Button);
