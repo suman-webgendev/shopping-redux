@@ -9,7 +9,8 @@
     "build": "pnpm run lint && vite build",
     "start": "vite preview --port 3000 --strictPort --host",
     "docker:build": "docker build -t ghcr.io/suman-webgendev/shopping-redux:latest .",
-    "docker:start": "docker run -p 3000:3000 ghcr.io/suman-webgendev/shopping-redux:latest"
+    "docker:start": "docker run -p 3000:3000 ghcr.io/suman-webgendev/shopping-redux:latest",
+    "docker:push": "docker push ghcr.io/suman-webgendev/shopping-redux:latest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
