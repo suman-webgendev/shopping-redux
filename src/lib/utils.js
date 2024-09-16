@@ -16,3 +16,7 @@ export const formatPrice = (price) => {
     currency: "USD",
   }).format(price);
 };
+
+export const capitalize = (input) => {
+  return input[0].toUpperCase() + input.slice(1);
+};

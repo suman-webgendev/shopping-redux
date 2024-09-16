@@ -67,4 +67,14 @@
   body {
     @apply bg-background text-foreground h-dvh overflow-hidden;
   }
+
+  .hide-number-stepper::-webkit-inner-spin-button,
+  .hide-number-stepper::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .hide-number-stepper {
+    -moz-appearance: textfield;
+  }
 }

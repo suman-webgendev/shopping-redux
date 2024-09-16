@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
       onClick={handleCardClick}
     >
       <CardHeader className="h-52 p-0">
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex size-full items-center justify-center">
           <img
             className="size-full object-contain"
             loading="lazy"
@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
         </div>
       </CardHeader>
 
-      <CardContent className="flex flex-grow flex-col justify-between p-4">
+      <CardContent className="flex grow flex-col justify-between p-4">
         <p className="mb-2 truncate font-semibold">{product.title}</p>
         <CardDescription className="line-clamp-2 h-[2.8rem] overflow-hidden pb-2">
           {product.description}

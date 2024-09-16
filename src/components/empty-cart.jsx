@@ -2,7 +2,7 @@ const EmptyCart = () => {
   return (
     <div className="flex size-full flex-col items-center justify-center">
       <img
-        className="mb-6 size-[16rem]"
+        className="mb-4 size-64"
         src="/not-found.svg"
         alt="Nothing on the cart."
       />

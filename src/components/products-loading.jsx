@@ -14,7 +14,7 @@ const ProductLoading = () => {
         {[...Array(10)].map((_, index) => (
           <li key={index}>
             <span></span>
-            <span className="image"></span>
+            <span></span>
             <span className="name"></span>
             <span className="price"></span>
             <span className="actions"></span>
